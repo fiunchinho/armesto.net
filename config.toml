@@ -1,0 +1,61 @@
+baseurl = "http://blog.armesto.net"
+languageCode = "es-es"
+title = "Jose Armesto's Blog"
+disqusShortname = "fiunchinho"
+googleAnalytics = "UA-44296526-1"
+paginate = 10
+footnotereturnlinkcontents = "↩"
+theme = "icarus"
+
+
+[permalinks]
+    post = "/:slug"
+
+
+[params]
+    author = "Jose Armesto"
+    bio = "Soy Jose Armesto. Apasionado de la programación que disfruta creando cosas y calmando su curiosidad. Obsesionado con las buenas prácticas."
+    location = "Barcelona"
+    site_description = "Software como estilo de vida"
+    copyright  = "Powered by [Hugo](//gohugo.io). Theme by [PPOffice](http://github.com/ppoffice)."
+    avatar = "images/avatar.png"
+    logo = "images/avatar.png"
+
+    # Format dates with Go's time formatting
+    date_format = "01-08-2006"
+
+    # Add custom assets with their paths relative to the static folder
+	custom_css = []
+	custom_js  = []
+
+# Create custom menu entries by defining a label and a link for
+# them. Since you can also link posts, you've the option the
+# place the links before or after them.
+#
+# E.g.: "Home" appears before all linked posts in the menu
+# and "Tags" / "Categories" after them.
+[[params.menu]]
+    before = true
+    label  = "Home"
+    link   = "/"
+
+# Enter a link for the follow button on the left
+[params.profile]
+    follow_button = "https://twitter.com/fiunchinho"
+
+
+[social]
+# Add your social network accounts to the profile section on the left
+# by entering your username. The links to your account will be
+# created automatically.
+    github          = "fiunchinho"
+    medium          = "fiunchinho"
+    stackoverflow   = "563072/fiunchinho"
+    twitter         = "fiunchinho"
+
+# Enable and disable widgets for the right sidebar
+[params.widgets]
+    recent_articles = true
+    categories = true
+    tags = true
+    tag_cloud = true
