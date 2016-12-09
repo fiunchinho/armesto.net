@@ -12,7 +12,7 @@ tags:
 - unit testing
 title: 'Mis impresiones sobre el debate #isTDDDead'
 url: /mis-impresiones-sobre-el-debate-istdddead/
-thumbnail: http://25.media.tumblr.com/45bb569edfcf14a03e9448397cd4ff27/tumblr_mh6v96548x1qhoi9qo1_r1_500.jpg
+thumbnail: https://25.media.tumblr.com/45bb569edfcf14a03e9448397cd4ff27/tumblr_mh6v96548x1qhoi9qo1_r1_500.jpg
 ---
 
 El <a title="Yo no soy DHH. Long live TDD" href="http://blog.armesto.net/yo-no-soy-dhh-long-live-tdd/" target="_blank">debate sobre si TDD está muerto</a> o no sigue _vivito y coleando_, y tras una guerra fría de artículos por ambas partes, ahora el intercambio de opiniones se ha pasado a un formato de <a title="isTDDDead" href="http://martinfowler.com/articles/is-tdd-dead/" target="_blank">vídeo debate</a> donde Martin Fowler, Kent Beck y el mismísimo David Heinemeier Hansson hablan sobre el tema.
