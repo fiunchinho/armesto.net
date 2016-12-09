@@ -1,4 +1,4 @@
-baseurl = "http://blog.armesto.net"
+baseurl = "https://armesto.net"
 languageCode = "es-es"
 title = "Jose Armesto's Blog"
 disqusShortname = "fiunchinho"
