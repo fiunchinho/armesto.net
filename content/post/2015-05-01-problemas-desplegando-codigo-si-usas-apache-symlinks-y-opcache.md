@@ -14,7 +14,7 @@ tags:
 - php
 title: Problemas desplegando código si usas Apache, symlinks y opcache
 url: /problemas-desplegando-codigo-si-usas-apache-symlinks-y-opcache/
-thumbnail: http://www.emiliotorrens.com/wp-content/uploads/2014/03/apache-logo.png
+thumbnail: "images/apache.png"
 ---
 
 Muchas de las soluciones disponibles en el mercado para desplegar aplicaciones se basan en el uso de enlaces simbólicos (o symlinks) para activar la última versión de código en el servidor.
