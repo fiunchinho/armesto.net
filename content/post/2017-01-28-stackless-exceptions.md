@@ -16,6 +16,7 @@ Este es un post corto donde os enseñaré qué son y por qué son utiles las Sta
 
 <!--more-->
 
+## Controlando el flujo de la aplicación con excepciones
 Digo que es un post corto porque podríamos entrar en el debate sobre si es buena práctica o no el utilizar excepciones en el código para dirigir el flujo de la aplicación. Con esto me refiero, por ejemplo, a lanzar una excepción cuando el usuario intenta gastarse más dinero del que tiene en la cuenta, y que una clase de otra capa se encargue de capturar esa excepción.
 Yo es un patrón que sí utilizo, aunque soy consciente de que mucha gente cree que es un anti patrón, argumentando que es más difícil seguir el flujo del programa, y que es más caro lanzar excepciones que simplemente devolver errores. De hecho, [el lenguaje Golang no permite lanzar excepciones](https://golang.org/doc/faq#exceptions), sino que cada llamada a una función devuelve dos valores: el valor en caso de éxito, y el valor en caso de error. Con esto se intenta conseguir que el flujo de la aplicación sea lineal y fácil de seguir.
 
