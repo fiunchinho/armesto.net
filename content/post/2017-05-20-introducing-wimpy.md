@@ -27,7 +27,6 @@ Wimpy's goal is to make it easy to follow AWS best practices, embracing [immutab
 Let's see an example for a playbook, where you can configure how Wimpy will deploy your application:
 
 ```
-
 - hosts: all
   connection: local
   vars:
@@ -41,7 +40,6 @@ Let's see an example for a playbook, where you can configure how Wimpy will depl
     - role: wimpy.environment
     - role: wimpy.build
     - role: wimpy.deploy
-
 ```
 
 Now you can just run the playbook using Ansible, or, if you don't have Ansible installed, you can just use our Docker image that contains Ansible and all Wimpy roles:
