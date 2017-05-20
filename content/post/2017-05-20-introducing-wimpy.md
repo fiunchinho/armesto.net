@@ -26,8 +26,8 @@ Wimpy's goal is to make it easy to follow AWS best practices, embracing [immutab
 
 Let's see an example for a playbook, where you can configure how Wimpy will deploy your application:
 
-```yaml
----
+```
+
 - hosts: all
   connection: local
   vars:
@@ -41,6 +41,7 @@ Let's see an example for a playbook, where you can configure how Wimpy will depl
     - role: wimpy.environment
     - role: wimpy.build
     - role: wimpy.deploy
+
 ```
 
 Now you can just run the playbook using Ansible, or, if you don't have Ansible installed, you can just use our Docker image that contains Ansible and all Wimpy roles:
@@ -69,9 +70,11 @@ The same applies for [S3](https://aws.amazon.com/s3/). Wimpy creates a single bu
 
 Last but not least, this role creates the needed security groups to allow traffic to your applications:
 
-```
-- Internet --> Load Balancers port --> Application port --> Databases
-```
+- From the internet to the Load Balancer specified port.
+- From the Load Balancer to your application exposed port.
+- From the application to the databases.
+
+By default, any other access it not allowed, so for example, databases can't be accesed from the internet.
 
 ### wimpy.build
 [Docker](https://www.docker.com/) is not only great for running applications but for packaging as well. By default, this role will create an [Elastic Container Registry](https://aws.amazon.com/ecr/) on AWS to store your applications images, but you can choose any Docker Registry that you like.
@@ -90,6 +93,7 @@ Feel free to read through [the code in the Github organization](https://github.c
 
 ## Acknowledgements
 Finally, I'd like to thank all the people that have helped me during the development of this project. This would've never happened without them, specially:
+
 - [Ismael Fernández](https://github.com/ismFerDev)
 - [Alberto Ramírez](https://github.com/aramirez-es)
 - [Víctor Caldentey](https://github.com/victuxbb)
