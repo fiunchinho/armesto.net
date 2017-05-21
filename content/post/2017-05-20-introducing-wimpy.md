@@ -106,6 +106,7 @@ You can tune how much traffic goes to new versions, so you can use this feature 
 
 ## Example
 I've two examples that show Wimpy in action
+
 - [Fork of the Symfony demo project](https://github.com/wimpy/symfony-demo), but adding Wimpy to deploy the application from Travis.
 - [Fork of the Spring pet-clinic demo project](https://github.com/wimpy/spring-petclinic), also just adding Wimpy to be executed on every merge to master.
 
