@@ -12,7 +12,7 @@ url: /introducing-wimpy/
 thumbnail: "images/wimpy.png"
 ---
 
-Today I want to share with you [the project I've been working on for the last year]((https://github.com/wimpy)) in my free time. For me, the project has already been a success: it's a pet project that has allowed me to learn a lot about Amazon Web Services, Docker and Ansible. But letting that aside, I believe is a useful project that can help you deploy your software better.
+Today I want to share with you [the project I've been working on for the last year](https://github.com/wimpy) in my free time. For me, the project has already been a success: it's a pet project that has allowed me to learn a lot about Amazon Web Services, Docker and Ansible. But letting that aside, I believe is a useful project that can help you deploy your software better.
 
 
 <!--more-->
@@ -62,7 +62,7 @@ As I said earlier, Wimpy has been build with modularity in mind, so it's not an 
 First of all, this role will enable [CloudTrail for your account](https://aws.amazon.com/cloudtrail/), an audit log so you can track *who-did-what-when* in your account.
 It also registers [a master key in KMS](https://aws.amazon.com/kms/) for applications to encrypt and decrypt secrets.
 
-Your AWS account must be prepared before you can deploy your applications. By executing this role, your accout gets two different isolated environments called `staging` and `production`. Each environment gets its own [Virtual Private Cloud](https://aws.amazon.com/vpc/, meaning that applications in one environment can't connect to applications in a different environment. Total isolation between environments right from the start.
+Your AWS account must be prepared before you can deploy your applications. By executing this role, your accout gets two different isolated environments called `staging` and `production`. Each environment gets its own [Virtual Private Cloud](https://aws.amazon.com/vpc/), meaning that applications in one environment can't connect to applications in a different environment. Total isolation between environments right from the start.
 
 The same applies for [S3](https://aws.amazon.com/s3/). Wimpy creates a single bucket for all your applications, but each application will only be able to access the application folder in the environment where is running. For example, if your S3 bucket is called `wimpy_storage_bucket`, the application called `cats-api` will have access to the `wimpy_storage_bucket/production/cats-api/` folder when deployed in `production`, but it will have access to `wimpy_storage_bucket/staging/cats-api/` when deployed in the `staging` environment.
 
@@ -84,6 +84,17 @@ This is probably the most interesting part!
 This role will deploy your application as an [Auto Scaling Group](https://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html) with [Scaling Policies](https://docs.aws.amazon.com/autoscaling/latest/userguide/policy_creating.html) that will scale up and down the number of instances. Each instance will run the application's Docker container, supervised by systemd.
 
 If you want, it will create a new [Route53 DNS](https://aws.amazon.com/route53/) register pointing to your [Load Balancer](https://aws.amazon.com/elasticloadbalancing/), which will balance the traffic between all the instances in your Auto Scaling Group.
+
+The role offers two different deployment strategies.
+
+#### Rolling Update
+Using this deployment strategy, we rely [on the built-in Rolling Update mechanism for Auto Scaling Groups](https://cloudonaut.io/rolling-update-with-aws-cloudformation/), where each instance of the Auto Scaling Group is replaced by a new instance that contains the version being deployed.
+If something fails while replacing old instances with new ones, AWS will handle the rollback for us.
+
+#### Blue / Green (Red / Black) deployment
+In this strategy, we create a new CloudFormation for every deploy. [This means that every deploy will generate a new Auto Scaling Group](https://martinfowler.com/bliki/BlueGreenDeployment.html) (which instances contain the version being deployed), a new Load Balancer and a new DNS register. Since now we have two different registers for the same domain name (one for each version deployed), Wimpy uses Route53 weighted registers to control how much traffic goes to every version.
+
+You can tune how much traffic goes to new versions, so you can use this feature for [canary releases](https://martinfowler.com/bliki/CanaryRelease.html). This is great for testing in production with real traffic.
 
 ## More info
 You can learn more about the project [in the documentation page](https://wimpy.github.io/docs/).
