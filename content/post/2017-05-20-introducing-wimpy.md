@@ -90,7 +90,7 @@ If you want, it will create a new [Route53 DNS](https://aws.amazon.com/route53/)
 
 The end result would be something like this:
 
-![Example image](/images/wimpy_deploy.png)
+![](/images/wimpy_deploy.png)
 
 The role offers two different deployment strategies.
 
