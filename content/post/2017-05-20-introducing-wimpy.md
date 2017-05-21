@@ -88,6 +88,10 @@ This role will deploy your application as an [Auto Scaling Group](https://docs.a
 
 If you want, it will create a new [Route53 DNS](https://aws.amazon.com/route53/) register pointing to your [Load Balancer](https://aws.amazon.com/elasticloadbalancing/), which will balance the traffic between all the instances in your Auto Scaling Group.
 
+The end result would be something like this:
+
+![Example image](/static/images/wimpy_deploy.png)
+
 The role offers two different deployment strategies.
 
 #### Rolling Update
@@ -109,6 +113,8 @@ Everything is created on your own AWS account. That means that you are in full c
 
 You can learn more about the project [in the documentation page](https://wimpy.github.io/docs/).
 Feel free to read through [the code in the Github organization](https://github.com/wimpy). Contributions are really welcomed!
+
+<iframe src="https://docs.google.com/presentation/d/1vywHZrOgDfkpKeE_AaUQ5M9ZiJ1uspaDYwKGjxq99ZE/embed?start=false&loop=false&delayms=60000" frameborder="0" width="960" height="569" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ## Acknowledgements
 Finally, I'd like to thank all the people that have helped me during the development of this project. This would've never happened without them, specially:
