@@ -5,7 +5,7 @@ categories:
 date: 2013-10-18T23:47:55Z
 dsq_thread_id:
 - "2648474400"
-guid: http://blog.armesto.net/?p=42
+guid: https://blog.armesto.net/?p=42
 id: 42
 tags:
 - composer

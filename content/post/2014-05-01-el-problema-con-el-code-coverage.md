@@ -5,7 +5,7 @@ categories:
 date: 2014-05-01T13:27:28Z
 dsq_thread_id:
 - "2652533223"
-guid: http://blog.armesto.net/?p=92
+guid: https://blog.armesto.net/?p=92
 id: 92
 tags:
 - tdd
@@ -44,7 +44,7 @@ Una vez que sabemos qué es, la siguiente pregunta sale de forma natural.
 
 Nótese el énfasis en la palabra &#8220;necesaria&#8221;. Y aquí es donde viene el problema. Muchos dirán que es una locura subir un código a producción que no llegue al 80% de cobertura. Otros te dirán incluso que 90%. Y siempre encontrarás al fanático que no programa ni el vídeo VHS y que dice que él no sube a producción nada que baje del 100%, porque es el porcentaje que obtiene al hacer siempre TDD.
 
-Mi problema con todo esto es que los tests son una **herramienta de confianza**. Además de que me ayudan a <a title="Yo no soy DHH. Long live TDD" href="http://blog.armesto.net/yo-no-soy-dhh-long-live-tdd/" target="_blank">conseguir un mejor diseño haciéndome pensar en el problema antes de pensar en la solución</a>, me ayudan a detectar errores ejecutándolos después de cada refactorización. Esto hace que yo tenga toda la seguridad del mundo en refactorizar código: sé que siempre puedo lanzar los tests y ver si he roto algo. Es mi red de seguridad, mi chivato de errores. Entonces, ¿cuantos tests tengo que escribir? La respuesta es obvia: **los tests necesarios para conseguir esa confianza**. Los necesarios para decir, si están en verde es que todo está bien.
+Mi problema con todo esto es que los tests son una **herramienta de confianza**. Además de que me ayudan a <a title="Yo no soy DHH. Long live TDD" href="https://blog.armesto.net/yo-no-soy-dhh-long-live-tdd/" target="_blank">conseguir un mejor diseño haciéndome pensar en el problema antes de pensar en la solución</a>, me ayudan a detectar errores ejecutándolos después de cada refactorización. Esto hace que yo tenga toda la seguridad del mundo en refactorizar código: sé que siempre puedo lanzar los tests y ver si he roto algo. Es mi red de seguridad, mi chivato de errores. Entonces, ¿cuantos tests tengo que escribir? La respuesta es obvia: **los tests necesarios para conseguir esa confianza**. Los necesarios para decir, si están en verde es que todo está bien.
 
 ¿Cómo se mide esa confianza en un porcentaje de code coverage equivalente? **No se puede**. No se puede porque depende del código que estés haciendo. Si esa clase tiene un _getter_ que lo único que hace es devolver una propiedad y nada más, no escribiré un test para ese método. Si ese otro método es complejo y posiblemente cambiará, créeme que lo testearé concienzudamente. La mejor metáfora que he visto sobre esto es la publicada en 2007, respondiendo a esta misma pregunta <a title="How much code coverage do you need?" href="http://www.developertesting.com/archives/month200705/20070504-000425.html" target="_blank">How much test coverage do you need?</a>:
 
@@ -172,7 +172,7 @@ El problema de exigir un code coverage mínimo a los programadores, de proveer 
 
 > Una cobertura baja nos indica si un código está mal testeado, pero una alta no nos dice que un código esté bien testeado. De la misma forma que un test en rojo nos dice que hay un error, pero uno en verde no nos asegura la ausencia de errores.
 
-La motivación para exigir un code coverage mínimo creo que sale de <a title="Ni hombres lobo ni balas de plata" href="http://blog.armesto.net/ni-hombres-lobo-ni-balas-de-plata/" target="_blank">la necesidad de buscar respuesta a preguntas complejas</a> del desarrollo de software. Centrándonos en llegar al mínimo de cobertura de código, puede hacer que un comportamiento del programa se nos escape e introduzcamos un bug en el sistema, porque estábamos demasiado ocupados escribiendo tests sin valor para pasar por las líneas que nos exigían.
+La motivación para exigir un code coverage mínimo creo que sale de <a title="Ni hombres lobo ni balas de plata" href="https://blog.armesto.net/ni-hombres-lobo-ni-balas-de-plata/" target="_blank">la necesidad de buscar respuesta a preguntas complejas</a> del desarrollo de software. Centrándonos en llegar al mínimo de cobertura de código, puede hacer que un comportamiento del programa se nos escape e introduzcamos un bug en el sistema, porque estábamos demasiado ocupados escribiendo tests sin valor para pasar por las líneas que nos exigían.
 
 ## Conclusión
 

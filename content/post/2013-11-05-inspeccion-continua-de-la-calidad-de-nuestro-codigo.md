@@ -46,7 +46,7 @@ El hecho de saber si algo se ha roto con un commit es de vital importancia, sobr
 
 Para que todo el mundo tenga visibilidad del estado actual, también pone a nuestra disposición una insignia que indica si los tests están en rojo o en verde. Podemos colocar esta insignia en el README.md de nuestro proyecto, y cualquiera que entre verá si hay algo roto.
 
-[<img class="alignnone size-full wp-image-55" alt="PHPUnit badge" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_025.png" width="801" height="112" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_025.png 801w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_025-300x41.png 300w" sizes="(max-width: 801px) 100vw, 801px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_025.png)
+[<img class="alignnone size-full wp-image-55" alt="PHPUnit badge" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_025.png" width="801" height="112" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_025.png 801w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_025-300x41.png 300w" sizes="(max-width: 801px) 100vw, 801px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_025.png)
 
 Por último, recuerda que por defecto TravisCI ejecutará **PHPUnit** para lanzar los tests, utilizando la configuración del fichero _phpunit.xml.dist_ para saber donde están los tests y cómo lanzarlos. Si quieres cambiar algo de lo que TravisCI hace por defecto, <a title="TravisCI Docs" href="http://about.travis-ci.org/docs/user/languages/php/" target="_blank">la documentación</a> está bastante bien.
 
@@ -80,15 +80,15 @@ Una vez elegida tu configuración, puedes lanzar el análisis directamente eligi
 
 Lo bueno es que después de ejecutarse, Scrutinizer genera unos informes muy bonitos con todo tipo de información útil.
 
-[<img class="alignnone size-large wp-image-56" alt="Scrutinizer" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_023-1024x651.png" width="620" height="394" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_023-1024x651.png 1024w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_023-300x190.png 300w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_023.png 1099w" sizes="(max-width: 620px) 100vw, 620px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_023.png)
+[<img class="alignnone size-large wp-image-56" alt="Scrutinizer" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_023-1024x651.png" width="620" height="394" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_023-1024x651.png 1024w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_023-300x190.png 300w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_023.png 1099w" sizes="(max-width: 620px) 100vw, 620px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_023.png)
 
 Arriba de todo podemos ver **la nota final de nuestro código**, 9.18 en la imagen. Esta nota es calculada teniendo en cuenta el resultado de todas las inspecciones que tenemos configuradas. También nos ofrece un histórico con nuestra nota, o los incidentes (issues) de nuestro código que todavía tenemos pendientes por arreglar.
 
-[<img class="alignnone size-large wp-image-58" alt="Scrutinizer" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_024-1024x410.png" width="620" height="248" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_024-1024x410.png 1024w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_024-300x120.png 300w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_024.png 1093w" sizes="(max-width: 620px) 100vw, 620px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_024.png)
+[<img class="alignnone size-large wp-image-58" alt="Scrutinizer" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_024-1024x410.png" width="620" height="248" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_024-1024x410.png 1024w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_024-300x120.png 300w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_024.png 1093w" sizes="(max-width: 620px) 100vw, 620px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_024.png)
 
 Por último, igual que TravisCI, nos ofrece la posibilidad de poner una insignia con nuestra nota en el README.md del repositorio, para que todo el mundo vea a simple vista la calidad del código.
 
-[<img class="alignnone size-full wp-image-60" alt="Scrutinizr badge" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_026.png" width="809" height="236" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_026.png 809w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_026-300x87.png 300w" sizes="(max-width: 809px) 100vw, 809px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_026.png)
+[<img class="alignnone size-full wp-image-60" alt="Scrutinizr badge" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_026.png" width="809" height="236" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_026.png 809w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_026-300x87.png 300w" sizes="(max-width: 809px) 100vw, 809px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_026.png)
 
 ## Lo tienes fácil
 

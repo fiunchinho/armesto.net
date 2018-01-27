@@ -5,7 +5,7 @@ categories:
 date: 2014-05-23T20:35:44Z
 dsq_thread_id:
 - "2707892574"
-guid: http://blog.armesto.net/?p=108
+guid: https://blog.armesto.net/?p=108
 id: 108
 tags:
 - tdd
@@ -15,7 +15,7 @@ url: /mis-impresiones-sobre-el-debate-istdddead/
 thumbnail: https://25.media.tumblr.com/45bb569edfcf14a03e9448397cd4ff27/tumblr_mh6v96548x1qhoi9qo1_r1_500.jpg
 ---
 
-El <a title="Yo no soy DHH. Long live TDD" href="http://blog.armesto.net/yo-no-soy-dhh-long-live-tdd/" target="_blank">debate sobre si TDD está muerto</a> o no sigue _vivito y coleando_, y tras una guerra fría de artículos por ambas partes, ahora el intercambio de opiniones se ha pasado a un formato de <a title="isTDDDead" href="http://martinfowler.com/articles/is-tdd-dead/" target="_blank">vídeo debate</a> donde Martin Fowler, Kent Beck y el mismísimo David Heinemeier Hansson hablan sobre el tema.
+El <a title="Yo no soy DHH. Long live TDD" href="https://blog.armesto.net/yo-no-soy-dhh-long-live-tdd/" target="_blank">debate sobre si TDD está muerto</a> o no sigue _vivito y coleando_, y tras una guerra fría de artículos por ambas partes, ahora el intercambio de opiniones se ha pasado a un formato de <a title="isTDDDead" href="http://martinfowler.com/articles/is-tdd-dead/" target="_blank">vídeo debate</a> donde Martin Fowler, Kent Beck y el mismísimo David Heinemeier Hansson hablan sobre el tema.
 
 La verdad es que cuando anunciaron que Kent Beck iba a enfrentarse a David Heinemeier sobre el tema TDD, me alegré bastante por ver a gente tan buena en esto que hacemos debatiendo sobre distintas metodologías. &#8220;_Seguro que aprendo de ambas partes_&#8220;, pensaba yo.
 

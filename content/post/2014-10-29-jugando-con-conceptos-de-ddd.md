@@ -5,7 +5,7 @@ categories:
 date: 2014-10-29T00:46:39Z
 dsq_thread_id:
 - "3166973431"
-guid: http://blog.armesto.net/?p=119
+guid: https://blog.armesto.net/?p=119
 id: 119
 tags:
 - ddd

@@ -5,7 +5,7 @@ categories:
 date: 2014-04-19T09:00:56Z
 dsq_thread_id:
 - "2648654375"
-guid: http://blog.armesto.net/?p=77
+guid: https://blog.armesto.net/?p=77
 id: 77
 tags:
 - puppet
@@ -14,7 +14,7 @@ title: Utilizando Puphpet también en producción
 url: /utilizando-puphpet-tambien-en-produccion/
 ---
 
-Ya <a title="Herramientas para el programador PHP moderno" href="http://blog.armesto.net/herramientas-para-el-programador-php-moderno/" target="_blank">hablé en el pasado sobre Puphpet</a>, una herramienta web que genera manifiestos de <a title="Puppet" href="http://puppetlabs.com/" target="_blank">Puppet</a> y de <a title="Vagrant" href="http://www.vagrantup.com/" target="_blank">Vagrant</a> de forma rápida y sencilla.
+Ya <a title="Herramientas para el programador PHP moderno" href="https://blog.armesto.net/herramientas-para-el-programador-php-moderno/" target="_blank">hablé en el pasado sobre Puphpet</a>, una herramienta web que genera manifiestos de <a title="Puppet" href="http://puppetlabs.com/" target="_blank">Puppet</a> y de <a title="Vagrant" href="http://www.vagrantup.com/" target="_blank">Vagrant</a> de forma rápida y sencilla.
 
 Llevo tiempo utilizándolo para configurar mis máquinas virtuales de desarrollo junto a Vagrant, pero siempre estaba un poco con la mosca detrás de la oreja por el hecho de no poder utilizarlo también en producción.
 
@@ -26,7 +26,7 @@ Resulta que para hacer su magia, <a title="Puphpet" href="https://puphpet.com/" 
 
 Para asegurarme de que nada fallaba, coloqué los archivos generados por <a title="Puphpet" href="https://puphpet.com/" target="_blank">Puphpet</a> en el mismo sitio que cuando <a title="Vagrant" href="http://www.vagrantup.com/" target="_blank">Vagrant</a> los utiliza, es decir _/vagrant_. Entré en mi servidor de producción y subí los archivos de forma que quedaron así:
 
-[<img class="alignnone size-full wp-image-78" alt="Puphpet tree" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_035.png" width="365" height="509" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_035.png 365w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_035-215x300.png 215w" sizes="(max-width: 365px) 100vw, 365px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_035.png)
+[<img class="alignnone size-full wp-image-78" alt="Puphpet tree" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_035.png" width="365" height="509" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_035.png 365w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_035-215x300.png 215w" sizes="(max-width: 365px) 100vw, 365px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_035.png)
 
 Una vez que tenía todo en su sitio, tan solo me quedaba ejecutar los scripts **en el mismo orden** que <a title="Vagrant" href="http://www.vagrantup.com/" target="_blank">Vagrant</a> lo hace. Acordaos de dar permisos de ejecución a esos ficheros. El orden es el siguiente:
 

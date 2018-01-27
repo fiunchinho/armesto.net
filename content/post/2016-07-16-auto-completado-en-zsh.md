@@ -5,14 +5,14 @@ categories:
 date: 2016-07-16T17:49:15Z
 dsq_thread_id:
 - "4990566637"
-guid: http://blog.armesto.net/?p=135
+guid: https://blog.armesto.net/?p=135
 id: 135
 title: Auto completado en zsh
 url: /auto-completado-en-zsh/
 thumbnail: https://ih1.redbubble.net/image.154489147.8220/sticker,375x360.png
 ---
 
-Hace tiempo escribí un post sobre [cómo sacarle el máximo rendimiento a tu terminal utilizando zsh](http://blog.armesto.net/sacale-el-maximo-partido-a-tu-terminal-con-zsh/), en el que introducía [zsh](http://www.zsh.org/) y el framework [oh-my-zsh](http://ohmyz.sh/) para tener una experiencia más placentera usando el terminal.
+Hace tiempo escribí un post sobre [cómo sacarle el máximo rendimiento a tu terminal utilizando zsh](https://blog.armesto.net/sacale-el-maximo-partido-a-tu-terminal-con-zsh/), en el que introducía [zsh](http://www.zsh.org/) y el framework [oh-my-zsh](http://ohmyz.sh/) para tener una experiencia más placentera usando el terminal.
 
 Hoy veremos algunas funcionalidades extras que nos aporta esta herramienta y que nos puede ayudar a decidirnos a empezar a utilizarla.
 
@@ -20,7 +20,7 @@ Hoy veremos algunas funcionalidades extras que nos aporta esta herramienta y que
 
 ## Auto Completado
 
-Una de las cosas que comentamos [en el artículo original](http://blog.armesto.net/sacale-el-maximo-partido-a-tu-terminal-con-zsh/) era que el auto completado de comandos era bastante potente, pero podemos mejorarlo aun más. Añadiendo esto a nuestra configuración
+Una de las cosas que comentamos [en el artículo original](https://blog.armesto.net/sacale-el-maximo-partido-a-tu-terminal-con-zsh/) era que el auto completado de comandos era bastante potente, pero podemos mejorarlo aun más. Añadiendo esto a nuestra configuración
 
 <pre>zstyle ':completion:*' verbose yes
 zstyle ':completion:*' group-name ''</pre>

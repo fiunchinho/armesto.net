@@ -6,7 +6,7 @@ categories:
 date: 2015-05-01T12:14:32Z
 dsq_thread_id:
 - "3727662731"
-guid: http://blog.armesto.net/?p=123
+guid: https://blog.armesto.net/?p=123
 id: 123
 tags:
 - apache

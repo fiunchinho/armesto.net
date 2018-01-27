@@ -5,7 +5,7 @@ categories:
 date: 2014-04-12T13:42:17Z
 dsq_thread_id:
 - "2648474449"
-guid: http://blog.armesto.net/?p=62
+guid: https://blog.armesto.net/?p=62
 id: 62
 title: Sácale el máximo partido a tu terminal con zsh
 url: /sacale-el-maximo-partido-a-tu-terminal-con-zsh/
@@ -45,7 +45,7 @@ Una de las cosas que más nos gusta a los frikis de la consola es configurar nue
 
 Si queremos hacerlo nosotros mismos, podemos configurar no solo el prompt normal, sino que **nos permite configurar texto a la derecha del prompt**. Para que os hagáis una idea, el que yo utilizo actualmente muestra, además de lo habitual, la rama actual de git, si hay cambios por comittear pendientes, el _load_ de la máquina y la hora actual, estos dos últimos en la parte derecha del prompt. Luce así:
 
-[<img class="alignnone size-large wp-image-67" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_031-1024x47.png" alt="zsh prompt" width="620" height="28" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_031-1024x47.png 1024w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_031-300x14.png 300w" sizes="(max-width: 620px) 100vw, 620px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_031.png)
+[<img class="alignnone size-large wp-image-67" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_031-1024x47.png" alt="zsh prompt" width="620" height="28" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_031-1024x47.png 1024w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_031-300x14.png 300w" sizes="(max-width: 620px) 100vw, 620px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_031.png)
 
 ### Navegación entre directorios
 
@@ -65,7 +65,7 @@ En la consola acabamos repitiendo los mismos comandos varias veces. Hasta ahora,
 
 Además, siempre podemos conseguir que zsh sea más eficiente, viendo qué comandos son los que más utilizamos y creando alias para ellos. Igual que en _bash_, con la diferencia de que zsh nos proporciona un comando con información detallada sobre lo que más utilizamos:
 
-[<img class="alignnone size-full wp-image-69" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_032.png" alt="zsh_stats" width="493" height="182" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_032.png 493w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_032-300x110.png 300w" sizes="(max-width: 493px) 100vw, 493px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_032.png)
+[<img class="alignnone size-full wp-image-69" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_032.png" alt="zsh_stats" width="493" height="182" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_032.png 493w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_032-300x110.png 300w" sizes="(max-width: 493px) 100vw, 493px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_032.png)
 
 ### Plugins
 
@@ -79,7 +79,7 @@ Con estos plugins obtengo desde archivos del manual con texto coloreado, hasta u
 
 Quiero hacer mención especial a uno de los plugins que tengo activados: **autojump**. Si la navegación entre directorio ya es la más cómoda del mundo con zsh, autojump va todavía más allá y va guardando tus directorios más utilizados en tu día a día. De tal forma que tan solo tienes que escribir &#8220;j&#8221; seguido de una cadena que él intentará matchear contra tu historial de directorios, y entrará en aquel que más hayas visitado. Esta cadena puede ser desde una letra, hasta el nombre entero de la carpeta. En este ejemplo, escribiendo &#8220;j w&#8221;, él ya sabía que me estaba refiriendo a _/var/www_.
 
-[<img class="alignnone size-full wp-image-70" src="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_034.png" alt="Autojump" width="373" height="145" srcset="http://blog.armesto.net/wp-content/uploads/2014/04/Selección_034.png 373w, http://blog.armesto.net/wp-content/uploads/2014/04/Selección_034-300x116.png 300w" sizes="(max-width: 373px) 100vw, 373px" />](http://blog.armesto.net/wp-content/uploads/2014/04/Selección_034.png)
+[<img class="alignnone size-full wp-image-70" src="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_034.png" alt="Autojump" width="373" height="145" srcset="https://blog.armesto.net/wp-content/uploads/2014/04/Selección_034.png 373w, https://blog.armesto.net/wp-content/uploads/2014/04/Selección_034-300x116.png 300w" sizes="(max-width: 373px) 100vw, 373px" />](https://blog.armesto.net/wp-content/uploads/2014/04/Selección_034.png)
 
 Para instalarlo tan solo ejecuta:
 

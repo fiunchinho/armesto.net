@@ -5,7 +5,7 @@ categories:
 date: 2014-04-24T00:35:31Z
 dsq_thread_id:
 - "2648449214"
-guid: http://blog.armesto.net/?p=83
+guid: https://blog.armesto.net/?p=83
 id: 83
 tags:
 - tdd
