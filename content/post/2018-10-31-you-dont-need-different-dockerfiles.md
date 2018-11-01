@@ -6,8 +6,8 @@ date: 2018-10-31T21:00:31Z
 tags:
 - development
 - docker
-title: You don't need different Dockerfiles
-url: /you-dont-need-different-dockerfiles/
+title: I didn't know you could do that with a Dockerfile!
+url: /i-didnt-know-you-could-do-that-with-a-dockerfile/
 thumbnail: "images/docker.png"
 ---
 
@@ -20,36 +20,33 @@ In this post I'll show you how to use multi-stage builds to:
 * use parameters in the `FROM` image
 
 <!--more-->
+## You don't need a Dockerfile for each environment
 Imagine the following scenario: you need certain tools installed on the Docker image that you will use for development, but you don't want those tools on the final image that will be deployed in production.
 For example, when developing in PHP it's useful to have `xdebug` installed, but you normally don't need it in production.
 
 
 ```bash
-# Use this image as the base image for dev and prod
+# Use this image as the base image for dev and prod.
 FROM php:7.2-apache as common
 
-# The pdo_mysql extension is required for both dev and prod
+# The pdo_mysql extension is required for both dev and prod.
 RUN a2enmod rewrite; \
     chown -R www-data:www-data /var/www/html; \
     docker-php-ext-install pdo_mysql;
 
-# Here we configure PHP, but this configuration will be overwritten for prod
+# Here we configure PHP, but this configuration will be overwritten for prod.
 COPY php.ini /usr/local/etc/php/php.ini
 
 
-# In the development image we download dependencies and copy our code to the image
-FROM common as dev
+# In this image we will download the dependencies, but without the development dependencies.
+# The dependencies are installed in the vendor folder that will later be copied.
+FROM composer as builder-dev
 
-# We only want xdebug in development
-RUN apt-get update; apt-get install -y wget zip unzip git; \
-    pecl install xdebug-2.6.0; \
-    docker-php-ext-enable xdebug; \
-    wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --install-dir=/usr/bin --filename=composer --quiet
+WORKDIR /app
 
-WORKDIR /var/www/html
-
-# Copy only the files needed to download dependencies to avoid redownloading them when our code changes
-COPY composer.json composer.lock /var/www/html/
+# Copy only the files needed to download dependencies to avoid redownloading them when our code changes.
+# This will download development/testing dependencies.
+COPY composer.json composer.lock /app/
 RUN composer install  \
     --ignore-platform-reqs \
     --no-ansi \
@@ -57,17 +54,34 @@ RUN composer install  \
     --no-interaction \
     --no-scripts
 
-# We enable the errors only in development
+# We need to copy our whole application so that we can generate the autoload file inside the vendor folder.
+COPY . /app
+RUN composer dump-autoload --optimize --classmap-authoritative
+
+
+# This is the image using in development.
+FROM common as dev
+
+# We only install xdebug in development.
+RUN pecl install xdebug-2.6.0; \
+    docker-php-ext-enable xdebug
+
+WORKDIR /var/www/html
+
+# We enable the errors only in development.
 ENV DISPLAY_ERRORS="On"
 
-# Copy our application and setup PHP for development
+# Copy our application.
 COPY . /var/www/html/
+# Copy the downloaded dependencies from the previous stage.
+COPY --from=builder-dev /app/vendor /var/www/html/vendor
+# Setup PHP for development.
 COPY php-dev.ini /usr/local/etc/php/php.ini
 RUN composer dump-autoload --optimize --classmap-authoritative
 
 
-# In this image we will download the dependencies, but without the development dependencies
-# The dependencies are installed in the vendor folder that will later be copied
+# In this image we will download the dependencies, but without the development dependencies.
+# The dependencies are installed in the vendor folder that will be copied later into the prod image.
 FROM composer as builder-prod
 
 WORKDIR /app
@@ -81,23 +95,23 @@ RUN composer install  \
     --no-interaction \
     --no-scripts
 
+# We need to copy our whole application so that we can generate the autoload file inside the vendor folder.
 COPY . /app
 RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
 
-# This is the image that will be deployed on production
+# This is the image that will be deployed on production.
 FROM common as prod
 
-# Add label and exposed port for documentation
+# Add label and exposed port for documentation.
 LABEL maintainer="Jose Armesto <jose@armesto.net>"
-
 EXPOSE 80
 
-# No display errors to users in production
+# No display errors to users in production.
 ENV DISPLAY_ERRORS="Off"
 
 # Copy our application
 COPY . /var/www/html/
-# Copy the downloaded dependencies from the previous stage
+# Copy the downloaded dependencies from the builder-prod stage.
 COPY --from=builder-prod /app/vendor /var/www/html/vendor
 ```
 
@@ -105,7 +119,7 @@ COPY --from=builder-prod /app/vendor /var/www/html/vendor
 Now if you are developing and need your `dev` version of the application, you can build the Docker image like
 
 ```
-$ docker build --tag "my-awesome-app" --target dev .
+$ docker build --tag "my-awesome-app" --target "dev" .
 ```
 
 And if you need the `prod` version that will be deployed in production, you can pass the `prod` target or just don't pass any target at all
@@ -115,27 +129,18 @@ $ docker build --tag "my-awesome-app" .
 ```
 
 ### Can we improve the building speed for development?
-It seems that building our docker image for development is kind of slow. Can we do it faster?
-It seems that our approach is copying our application several times from our laptop to the image layer, making the process slow. And it will be slower as our application grows.
+It seems that building our docker image for development is kind of slow. Can we make it faster?
+Our approach is copying our application files several times from our laptop to the image layer, making the process slow. And it will be slower as our application grows.
+
 We can merge the `builder-dev` and the `dev` stages into one big stage to reduce the number of times we copy our application.
+Let's remove the `builder-dev` stage and change our `dev` stage to this
 
 ```bash
-# Use this image as the base image for dev and prod
-FROM php:7.2-apache as common
-
-# The pdo_mysql extension is required for both dev and prod
-RUN a2enmod rewrite; \
-    chown -R www-data:www-data /var/www/html; \
-    docker-php-ext-install pdo_mysql;
-
-# Here we configure PHP, but this configuration will be overwritten for prod
-COPY php.ini /usr/local/etc/php/php.ini
-
-
-# In the development image we download dependencies and copy our code to the image
+# In the development image we download dependencies and copy our code to the image.
 FROM common as dev
 
-# We only want xdebug in development
+# We only want xdebug in development.
+# We need to install some tools required by Composer, which will run in this stage.
 RUN apt-get update; apt-get install -y wget zip unzip git; \
     pecl install xdebug-2.6.0; \
     docker-php-ext-enable xdebug; \
@@ -155,48 +160,14 @@ RUN composer install  \
 # We enable the errors only in development
 ENV DISPLAY_ERRORS="On"
 
-# Copy our application and setup PHP for development
+# Copy our application. Now the dependencies are already there.
 COPY . /var/www/html/
+# Setup PHP for development.
 COPY php-dev.ini /usr/local/etc/php/php.ini
 RUN composer dump-autoload --optimize --classmap-authoritative
-
-
-# In this image we will download the dependencies, but without the development dependencies
-# The dependencies are installed in the vendor folder that will later be copied
-FROM composer as builder-prod
-
-WORKDIR /app
-
-COPY composer.json composer.lock /app/
-RUN composer install  \
-    --ignore-platform-reqs \
-    --no-ansi \
-    --no-dev \
-    --no-autoloader \
-    --no-interaction \
-    --no-scripts
-
-COPY . /app
-RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
-
-# This is the image that will be deployed on production
-FROM common as prod
-
-# Add label and exposed port for documentation
-LABEL maintainer="Jose Armesto <jose@armesto.net>"
-
-EXPOSE 80
-
-# No display errors to users in production
-ENV DISPLAY_ERRORS="Off"
-
-# Copy our application
-COPY . /var/www/html/
-# Copy the downloaded dependencies from the previous stage
-COPY --from=builder-prod /app/vendor /var/www/html/vendor
 ```
 
-Our development image will contain composer too, but I think that's not a big deal in this scenario.
+Our development image will contain Composer (and wget, zip...) too, but I think that's not a big deal in this scenario.
 
 ### Combine targets with docker-compose
 The reality is that many people use docker-compose while developing locally because it makes it really easy to start other containers along with your application, like a database that your application needs to store information.
@@ -235,7 +206,7 @@ FROM php:${PHP_VERSION}-apache as common
 # .
 ```
 
-Then just pass the right PHP version to use when building the image
+Then just pass the right PHP version to use when building the image. If we want to use PHP v7.1 instead
 
 ```
 $ docker build --tag "my-awesome-app" --build-arg PHP_VERSION=7.1 .
@@ -243,33 +214,24 @@ $ docker build --tag "my-awesome-app" --build-arg PHP_VERSION=7.1 .
 
 ## Copying from remote images
 We have seen how to copy files from previously generated layers.
-But did you know that you can copy files from remote images? For example, instead of installing Composer, we could just copy it from the official Composer image
+But did you know that you can copy files from remote images?
+
+For example, instead of installing Composer in our `dev` stage, we could just copy it from the official Composer image
 
 ```bash
-# Use this image as the base image for dev and prod
-FROM php:7.2-apache as common
-
-# The pdo_mysql extension is required for both dev and prod
-RUN a2enmod rewrite; \
-    chown -R www-data:www-data /var/www/html; \
-    docker-php-ext-install pdo_mysql;
-
-# Here we configure PHP, but this configuration will be overwritten for prod
-COPY php.ini /usr/local/etc/php/php.ini
-
-
-# In the development image we download dependencies and copy our code to the image
+# In the development image we download dependencies and copy our code to the image.
 FROM common as dev
 
-# We only want xdebug in development
+# We only want xdebug in development.
+# We need to install some tools required by Composer, which will run in this stage.
 RUN apt-get update; apt-get install -y zip unzip git; \
     pecl install xdebug-2.6.0; \
     docker-php-ext-enable xdebug;
 
-WORKDIR /var/www/html
-
-# Copy composer binary from official Composer image
+# Copy composer binary from official Composer image.
 COPY --from=composer /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www/html
 
 # Copy only the files needed to download dependencies to avoid redownloading them when our code changes
 COPY composer.json composer.lock /var/www/html/
@@ -283,43 +245,9 @@ RUN composer install  \
 # We enable the errors only in development
 ENV DISPLAY_ERRORS="On"
 
-# Copy our application and setup PHP for development
+# Copy our application. Now the dependencies are already there.
 COPY . /var/www/html/
+# Setup PHP for development.
 COPY php-dev.ini /usr/local/etc/php/php.ini
 RUN composer dump-autoload --optimize --classmap-authoritative
-
-
-# In this image we will download the dependencies, but without the development dependencies
-# The dependencies are installed in the vendor folder that will later be copied
-FROM composer as builder-prod
-
-WORKDIR /app
-
-COPY composer.json composer.lock /app/
-RUN composer install  \
-    --ignore-platform-reqs \
-    --no-ansi \
-    --no-dev \
-    --no-autoloader \
-    --no-interaction \
-    --no-scripts
-
-COPY . /app
-RUN composer dump-autoload --optimize --no-dev --classmap-authoritative
-
-# This is the image that will be deployed on production
-FROM common as prod
-
-# Add label and exposed port for documentation
-LABEL maintainer="Jose Armesto <jose@armesto.net>"
-
-EXPOSE 80
-
-# No display errors to users in production
-ENV DISPLAY_ERRORS="Off"
-
-# Copy our application
-COPY . /var/www/html/
-# Copy the downloaded dependencies from the previous stage
-COPY --from=builder-prod /app/vendor /var/www/html/vendor
 ```
