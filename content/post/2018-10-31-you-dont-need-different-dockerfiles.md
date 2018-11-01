@@ -2,7 +2,7 @@
 author: fiunchinho
 categories:
 - Code
-date: 2018-31-10T21:00:31Z
+date: 2018-10-31T22:05:38+02:00
 tags:
 - development
 - docker
@@ -20,6 +20,10 @@ In this post I'll show you how to use multi-stage builds to:
 * use parameters in the `FROM` image
 
 <!--more-->
+Multi-stage builds allow us to use the `FROM` keyword in several places of the same Dockerfile.
+Every time we use the `FROM` keyword a new stage will be created.
+One important thing is that we can name these stages to refer to them later on in the Dockerfile.
+
 ## You don't need a Dockerfile for each environment
 Imagine the following scenario: you need certain tools installed on the Docker image that you will use for development, but you don't want those tools on the final image that will be deployed in production.
 For example, when developing in PHP it's useful to have `xdebug` installed, but you normally don't need it in production.
@@ -116,17 +120,25 @@ COPY --from=builder-prod /app/vendor /var/www/html/vendor
 ```
 
 ### Building our application image
-Now if you are developing and need your `dev` version of the application, you can build the Docker image like
+When building the Docker image now we can choose which stage to build. The stages that will be executed depend on which stage we choose to build and the order in which these stages are defined in the Dockerfile.
+
+If we are developing and need our `dev` version of the application, we can build the Docker image like
 
 ```
 $ docker build --tag "my-awesome-app" --target "dev" .
 ```
 
-And if you need the `prod` version that will be deployed in production, you can pass the `prod` target or just don't pass any target at all
+This will only execute the Dockerfile lines of the stage named `dev`, and the stages that appear right before it: `common` and `builder-dev`.
+If we would've placed the `builder-prod` stage before the definition of the `dev` stage (right after the `builder-dev` stage), the `builder-prod` stage lines would've got executed when building the `dev` stage, even though we don't need them.
+So make sure to plan ahead and put the stages in the right order: every stage related to `dev` will be placed before any stage related to `prod`.
+
+If we need the `prod` version that will be deployed in production, we can pass the `prod` target or just don't pass any target at all
 
 ```
 $ docker build --tag "my-awesome-app" .
 ```
+
+This will execute all the instructions in the Dockerfile, because the `prod` stage is the last one to appear on the Dockerfile.
 
 ### Can we improve the building speed for development?
 It seems that building our docker image for development is kind of slow. Can we make it faster?
@@ -169,30 +181,6 @@ RUN composer dump-autoload --optimize --classmap-authoritative
 
 Our development image will contain Composer (and wget, zip...) too, but I think that's not a big deal in this scenario.
 
-### Combine targets with docker-compose
-The reality is that many people use docker-compose while developing locally because it makes it really easy to start other containers along with your application, like a database that your application needs to store information.
-In this scenario you can tell docker-compose to build your image and which target to use.
-
-```yaml
-version: '2.4'
-services:
-  web:
-    build:
-      context: .
-      target: dev
-    ports:
-      - 8000:80
-    volumes:
-      - .:/var/www/html
-    depends_on:
-      - postgres
-  postgres:
-    image: postgres:11.0-alpine
-    environment:
-      POSTGRES_USER: dbuser
-      POSTGRES_DB: my-db
-```
-
 ## Parametrized image tags
 Did you know that you can use parameters for the base image to use when building your image? We can define a parameter that sets the PHP version to use
 
@@ -208,6 +196,38 @@ Then just pass the right PHP version to use when building the image. If we want 
 
 ```
 $ docker build --tag "my-awesome-app" --build-arg "PHP_VERSION=7.1" .
+```
+
+### Combine targets with docker-compose
+The reality is that many people use docker-compose while developing locally because it makes it really easy to start other containers along with your application, like a database that your application needs to store information.
+In this scenario you can tell docker-compose to build your image and which target to use.
+
+```yaml
+version: '2.4'
+services:
+  web:
+    build:
+      context: .
+      target: dev
+      args:
+        PHP_VERSION: ${PHP_VERSION}
+    ports:
+      - 8000:80
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres:11.0-alpine
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_DB: my-db
+```
+
+You can now fire up your application and its dependencies as usual, but you can pass the desired PHP version as an environment variable
+
+```
+$ PHP_VERSION=7.1 docker-compose up --build
 ```
 
 ## Copying from remote images
