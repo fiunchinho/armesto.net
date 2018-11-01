@@ -21,7 +21,7 @@ theme = "hugo-icarus-theme"
     bio = "Blogger - Programmer - Gopher"
     location = "Earth"
     site_description = ""
-    copyright  = "Powered by [Hugo](//gohugo.io). Theme by [PPOffice](http://github.com/ppoffice)."
+    copyright  = "Powered by [Hugo](//gohugo.io). Theme by [PPOffice](https://github.com/ppoffice)."
     avatar = "css/images/avatar.png"
     logo = "css/images/logo.png"
 

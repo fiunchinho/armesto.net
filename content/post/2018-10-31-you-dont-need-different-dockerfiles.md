@@ -24,7 +24,7 @@ Imagine the following scenario: you need certain tools installed on the Docker i
 For example, when developing in PHP it's useful to have `xdebug` installed, but you normally don't need it in production.
 
 
-```dockerfile
+```
 # Use this image as the base image for dev and prod
 FROM php:7.2-apache as common
 
@@ -119,7 +119,7 @@ It seems that building our docker image for development is kind of slow. Can we 
 It seems that our approach is copying our application several times from our laptop to the image layer, making the process slow. And it will be slower as our application grows.
 We can merge the `builder-dev` and the `dev` stages into one big stage to reduce the number of times we copy our application.
 
-```dockerfile
+```bash
 # Use this image as the base image for dev and prod
 FROM php:7.2-apache as common
 
@@ -225,7 +225,7 @@ services:
 ## Parametrized image tags
 Did you know that you can use parameters for the base image to use when building your image? We can define a parameter that sets the PHP version to use
 
-```dockerfile
+```bash
 ARG PHP_VERSION=7.2
 
 FROM php:${PHP_VERSION}-apache as common
@@ -245,7 +245,7 @@ $ docker build --tag "my-awesome-app" --build-arg PHP_VERSION=7.1 .
 We have seen how to copy files from previously generated layers.
 But did you know that you can copy files from remote images? For example, instead of installing Composer, we could just copy it from the official Composer image
 
-```dockerfile
+```bash
 # Use this image as the base image for dev and prod
 FROM php:7.2-apache as common
 
