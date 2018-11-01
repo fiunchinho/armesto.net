@@ -29,7 +29,7 @@ enableGitInfo = true
 	logo = "images/avatar.png"
 
 	# Format dates with Go's time formatting
-	date_format = "01-08-2006"
+	date_format = "2006-01-02T15:04:05Z"
 
 	# Add custom assets with their paths relative to the static folder
 	custom_css = []
