@@ -24,7 +24,7 @@ Imagine the following scenario: you need certain tools installed on the Docker i
 For example, when developing in PHP it's useful to have `xdebug` installed, but you normally don't need it in production.
 
 
-```
+```bash
 # Use this image as the base image for dev and prod
 FROM php:7.2-apache as common
 
