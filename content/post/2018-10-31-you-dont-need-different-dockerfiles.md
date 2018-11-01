@@ -2,7 +2,7 @@
 author: fiunchinho
 categories:
 - Code
-date: 2018-10-31T21:00:31Z
+date: 2018-31-10T21:00:31Z
 tags:
 - development
 - docker
@@ -202,14 +202,12 @@ ARG PHP_VERSION=7.2
 FROM php:${PHP_VERSION}-apache as common
 # Here would go the rest of the Dockerfile
 # ...
-# ..
-# .
 ```
 
 Then just pass the right PHP version to use when building the image. If we want to use PHP v7.1 instead
 
 ```
-$ docker build --tag "my-awesome-app" --build-arg PHP_VERSION=7.1 .
+$ docker build --tag "my-awesome-app" --build-arg "PHP_VERSION=7.1" .
 ```
 
 ## Copying from remote images
