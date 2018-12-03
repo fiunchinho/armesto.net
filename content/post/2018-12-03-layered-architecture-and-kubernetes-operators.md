@@ -36,12 +36,7 @@ In other kind of applications, we have been creating specific objects that take 
 We usually call these objects the data access layer, but somehow we don't do it when accessing the data stored in Kubernetes objects.
 It's pretty normal to find [code like this all over a Kubernetes operator or controller](https://github.com/fiunchinho/iam-role-annotator/blob/5d56a9b2801064d4d1d71f5d47cf8b496a4b37de/pkg/service.go#L73-L77)
 
-```go
-func (s *IamRoleAnnotator) submitChangesToKubernetesAPI(deployment *appsv1beta1.Deployment) (*appsv1beta1.Deployment, error) {
-	s.logger.Infof("Sending changes to k8s API")
-	return s.client.AppsV1beta1().Deployments(deployment.Namespace).Update(deployment)
-}
-```
+{{< gist fiunchinho e99adce57a2d676e1d39fa3653a7e78a >}}
 
 We are coupling our business logic to the client-go library that we use to talk to the Kubernetes API.
 This makes our Kubernetes operators and controllers hard to test, because when this code is executed, it will try to connect to a real Kubernetes cluster.
@@ -59,20 +54,10 @@ We would still need to write some integration tests, to make sure that everythin
 In order to achieve what we've been talking about on this post, it's really important that we use [dependency injection](https://martinfowler.com/articles/injection.html) to pass the right objects to our methods.
 We need to be able to pass either the real data access objects or the stubbed ones.
 
-{{< gist spf13 7896402 >}}
-
 Instead of instantiating the objects that your service depends on inside its own functions, declare those dependencies as parameters that need to be passed when creating the service.
 This way you can pass the right implementation that you need. On your unit tests, pass the stubbed implementation. On the real bootstrapping of your service, pass the real implementation that talks to the Kubernetes API, [like this](https://github.com/fiunchinho/iam-role-annotator/blob/5d56a9b2801064d4d1d71f5d47cf8b496a4b37de/pkg/service.go#L27-L34)
 
-{{< highlight go >}}
-func NewIamRoleAnnotator(k8sCli kubernetes.Interface, awsAccountID string, logger Logger) *IamRoleAnnotator {
-	return &IamRoleAnnotator{
-		client:       k8sCli,
-		awsAccountID: awsAccountID,
-		logger:       logger,
-	}
-}
-{{< / highlight >}}
+{{< gist fiunchinho f53e16bc8c9cdfffed8a9275bd288447 >}}
 
 This service doesn't care if the `client` is the real one or the stubbed one.
 
