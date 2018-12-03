@@ -62,7 +62,7 @@ We need to be able to pass either the real data access objects or the stubbed on
 Instead of instantiating the objects that your service depends on inside its own functions, declare those dependencies as parameters that need to be passed when creating the service.
 This way you can pass the right implementation that you need. On your unit tests, pass the stubbed implementation. On the real bootstrapping of your service, pass the real implementation that talks to the Kubernetes API, [like this](https://github.com/fiunchinho/iam-role-annotator/blob/5d56a9b2801064d4d1d71f5d47cf8b496a4b37de/pkg/service.go#L27-L34)
 
-{{< highlight go "linenos=table >}}
+{{< highlight go >}}
 func NewIamRoleAnnotator(k8sCli kubernetes.Interface, awsAccountID string, logger Logger) *IamRoleAnnotator {
 	return &IamRoleAnnotator{
 		client:       k8sCli,
