@@ -29,6 +29,7 @@ All the important bits, the business logic containing what my controller actuall
 
 
 ### You are using a database, believe it or not
+
 Kubernetes Operators and Controllers use the Kubernetes API to get the current state of the cluster, and store data on inside Kubernetes resources.
 This means that these processes are using etcd as a database, which we normally access through the Kubernetes API using the [client-go library](https://github.com/kubernetes/client-go).
 
