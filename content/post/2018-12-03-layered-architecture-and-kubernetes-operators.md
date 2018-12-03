@@ -27,6 +27,7 @@ All the other files (specially the `pkt/service.go` file containing all the busi
 If I would switch to a different framework, I wouldn't need to change pretty much anything, only the bootstrapping of the process that takes care of all the wiring.
 All the important bits, the business logic containing what my controller actually does, that wouldn't need to be rewritten or even touched.
 
+
 ### You are using a database, believe it or not
 Kubernetes Operators and Controllers use the Kubernetes API to get the current state of the cluster, and store data on inside Kubernetes resources.
 This means that these processes are using etcd as a database, which we normally access through the Kubernetes API using the [client-go library](https://github.com/kubernetes/client-go).
@@ -35,7 +36,7 @@ In other kind of applications, we have been creating specific objects that take 
 We usually call these objects the data access layer, but somehow we don't do it when accessing the data stored in Kubernetes objects.
 It's pretty normal to find [code like this all over a Kubernetes operator or controller](https://github.com/fiunchinho/iam-role-annotator/blob/5d56a9b2801064d4d1d71f5d47cf8b496a4b37de/pkg/service.go#L73-L77)
 
-```
+```go
 func (s *IamRoleAnnotator) submitChangesToKubernetesAPI(deployment *appsv1beta1.Deployment) (*appsv1beta1.Deployment, error) {
 	s.logger.Infof("Sending changes to k8s API")
 	return s.client.AppsV1beta1().Deployments(deployment.Namespace).Update(deployment)
@@ -61,7 +62,7 @@ We need to be able to pass either the real data access objects or the stubbed on
 Instead of instantiating the objects that your service depends on inside its own functions, declare those dependencies as parameters that need to be passed when creating the service.
 This way you can pass the right implementation that you need. On your unit tests, pass the stubbed implementation. On the real bootstrapping of your service, pass the real implementation that talks to the Kubernetes API, [like this](https://github.com/fiunchinho/iam-role-annotator/blob/5d56a9b2801064d4d1d71f5d47cf8b496a4b37de/pkg/service.go#L27-L34)
 
-```
+```go
 func NewIamRoleAnnotator(k8sCli kubernetes.Interface, awsAccountID string, logger Logger) *IamRoleAnnotator {
 	return &IamRoleAnnotator{
 		client:       k8sCli,
@@ -72,3 +73,6 @@ func NewIamRoleAnnotator(k8sCli kubernetes.Interface, awsAccountID string, logge
 ```
 
 This service doesn't care if the `client` is the real one or the stubbed one.
+
+### Conclusion
+At the end of the day, it's just applying what we have already been applying to our applications for years. As Kubernetes controllers and operators get more complex, a better structure for our code is needed to keep the code maintainable.
