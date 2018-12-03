@@ -53,7 +53,7 @@ Siempre lo que se busca es escapar de Rails, minimizar la dependencia con el fra
 De todas formas sí que comparto con él una cosa, y es el nivel de dogma que TDD ha alcanzado en los últimos años. Personas como Uncle Bob, cuando hablan de TDD, se ponen una sotana encima para predicar la palabra sagrada. Uncle Bob ha sido capaz de convertir la práctica de TDD en una religión.
 
 <div style="width: 213px" class="wp-caption alignleft">
-  <img alt="Uncle Bob, el predicador" src="images/uncle_bob.jpg" width="203" height="214" />
+  <img alt="Uncle Bob, el predicador" src="/images/uncle_bob.jpg" width="203" height="214" />
   
   <p class="wp-caption-text">
     Uncle Bob, el predicador de Texas
