@@ -4,6 +4,7 @@ title = "HPSTR"
 theme = "hpstr"
 pluralizelisttitles = false
 PygmentsCodeFences = true
+pygmentsuseclasses = true
 Paginate = 5
 disqusShortname = "hpstrhugo"
 
