@@ -40,6 +40,7 @@ This environment is not linked to a Github repository, we will never promote cha
 It’s just a Kubernetes namespace used to run applications while developing, thanks to [skaffold](https://github.com/GoogleContainerTools/skaffold).
 
 In the dev environment Jenkins X installs a number of core applications they believe are required at a minimum to start folks off with CI/CD on Kubernetes. They come with configuration that wires these services together meaning everything works together straight away.
+
 1. Jenkins — provides both Continuous Integration and Continuous Delivery automation.
 2. Nexus — acts as a dependency cache for applications to dramatically improve build times.
 3. Docker registry — an in cluster Docker registry where the pipelines push application images.
@@ -50,6 +51,7 @@ In the dev environment Jenkins X installs a number of core applications they bel
 These environments are where the applications will ran. By default `Staging` and `Production` are created, but more environments can be created. `Staging` has the Auto promote strategy and `Production` the Manual promote strategy. We'll see what that means in a minute. 
 
 These environment are linked to
+
 * A GitHub repository containing a Helm chart that defines which application charts are to be installed on the environment, which versions of them and any environment specific configuration and additional resources (e.g. Secrets or operational applications like Prometheus etc). 
 * A Kubernetes namespace where the Helm chart from the repository will be installed.
 
@@ -83,6 +85,7 @@ You can create new environments using jx
     `jx create env --name prod --label Production --namespace my-prod`
 
 Some interesting options are
+
 * label: The Environment label which is a descriptive string like `Production` or `Staging`.
 * prefix: Environment repo prefix, your Git repo will be of the form `environment-$prefix-$envName`.
 * promotion: The promotion strategy, Auto or Manual.
@@ -103,6 +106,7 @@ But also we will have a repository for each environment where you want to deploy
 The repositories for the different environments describe all the applications that must be running on them. 
 
 So while developing your application, the usual flow would be
+
 * Create a Pull Request on the application repository: this will execute the application CI pipeline to build and test the application.
 * Once the Pull Request on the application repository is merged, the application pipeline will release this newly built version to a Docker Registry and promote it to the environments with the Auto promote strategy using a `jx` command.
 * If we want to deploy to production or any environment with the Manual promotion strategy, we need to execute the `jx` command targeting the desired environment.
