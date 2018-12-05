@@ -19,6 +19,8 @@ I'm talking about things like not coupling your business rules to your framework
 However, sometimes we forget that we can apply these patterns to almost any kind of software project.
 Lately I've been involved in projects that contain some Kubernetes Operators and the code in there could benefit a lot from the patterns that we already apply to our typical HTTP applications.
 
+<!--more-->
+
 ### Don't let your domain model depend on your framework
 I created [this Kubernetes controller](https://github.com/fiunchinho/iam-role-annotator) some months ago.
 There are several different frameworks to help you create your own Kubernetes Operator/Controller, but in this particular case, I decided to try [Kooper](https://github.com/spotahome/kooper).
