@@ -57,11 +57,15 @@ These environment are linked to
 
 When you want to deploy to an environment, a Pull Request must be made to that environment’s repository. 
 We can manually create the PR to deploy an application to an environment, or we can use this handy `jx` command 
-    `jx promote --app myapp --version 1.2.3 --env production`
+    ```
+    jx promote --app myapp --version 1.2.3 --env production
+    ```
 
 Typically we specify the environment while promoting to environments with the Manual promote strategy, like the `Production` environment.
 Instead of specifying the environment, we can create a Pull Request in all the environments having the Auto promote strategy using this `jx` command
-    `jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION) --no-wait`
+    ```
+    jx promote -b --all-auto --timeout 1h --version \$(cat ../../VERSION) --no-wait
+    ```
 
 Changing the `Production` environment's promote strategy from Manual to Auto you can do Continuous Deployment.
  
@@ -75,14 +79,19 @@ Also they are not permanent but created when a Pull Request is made to an applic
 When the `Preview Environment` is up and running Jenkins X will comment on your Pull Request with a link so in one click your team members can try out the preview. 
 
 You can create a preview environments using
+
+    ```
     jx preview
+    ```
 
 This will create the `Environment` and `Namespace` objects for this environment. 
 It will also build the application creating a new Docker image that will be deployed to the preview environment using the preview chart defined in the ./chart/preview folder.
 
 ## Managing environments
 You can create new environments using jx
-    `jx create env --name prod --label Production --namespace my-prod`
+    ```
+    jx create env --name prod --label Production --namespace my-prod
+    ```
 
 Some interesting options are
 
@@ -91,13 +100,19 @@ Some interesting options are
 * promotion: The promotion strategy, Auto or Manual.
 
 You can then list all existing environments
-    `jx get environments`
+    ```
+    jx get environments
+    ```
 
 Or edit an existing environment (-b for no interactive)
-    `jx edit env -b --name prod --label Production --no-gitops --namespace my-prod`
+    ```
+    jx edit env -b --name prod --label Production --no-gitops --namespace my-prod
+    ```
 
 Or finally delete it
-    `jx delete environment prod`
+    ```
+    jx delete environment prod
+    ```
 
 
 ## Deployment Flow 
