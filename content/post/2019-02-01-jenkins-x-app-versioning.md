@@ -19,6 +19,8 @@ But having to manually create tags or releases for our applications can be a ted
 It uses a tool called [jx-release-version](https://github.com/jenkins-x/jx-release-version) to figure out which is the next version to be released.
 In order to do that it checks what's the current released version in the repository looking at the released Git tags. It can also read this version from your `pom.xml` file, or your `Makefile`.
 
+If we use [semver semantics](https://semver.org/), and versions are written in the format major.minor.patch, jx-release-version will tell you which is the next patch version.
+
 The cool thing is that you don't need to use Jenkins X to use [jx-release-version](https://github.com/jenkins-x/jx-release-version)!
 
 Let's go through some examples.
