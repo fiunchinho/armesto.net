@@ -49,8 +49,6 @@ It will try to sync the git tags in your Git repository with the version that yo
 Your release process needs to look something like this
 
 ```bash
-/bin/bash
-
 # First we call the `jx-release-version` binary that will return the next version number to be released.
 # Every time we call the binary it will try to figure out the next version number. Normally it's not a good idea to call it more than once.
 RELEASE_VERSION=$(jx-release-version)
