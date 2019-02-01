@@ -51,7 +51,7 @@ Your release process needs to look something like this
 ```bash
 # First we call the `jx-release-version` binary that will return the next version number to be released.
 # Every time we call the binary it will try to figure out the next version number. Normally it's not a good idea to call it more than once.
-RELEASE_VERSION=$(jx-release-version)
+RELEASE_VERSION=`jx-release-version`
 echo "New release version ${RELEASE_VERSION}
 
 # We update our current pom.xml file with this new version number.
