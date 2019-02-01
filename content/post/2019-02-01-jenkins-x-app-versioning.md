@@ -19,6 +19,8 @@ But having to manually create tags or releases for our applications can be a ted
 It uses a tool called [jx-release-version](https://github.com/jenkins-x/jx-release-version) to figure out which is the next version to be released.
 In order to do that it checks what's the current released version in the repository looking at the released Git tags. It can also read this version from your `pom.xml` file, or your `Makefile`.
 
+The cool thing is that you don't need to use Jenkins X to use [jx-release-version](https://github.com/jenkins-x/jx-release-version)!
+
 Let's go through some examples.
 
 <!--more-->
@@ -87,7 +89,7 @@ Similarly, if our `pom.xml` file had `<version>0.0-23-SNAPSHOT</version>` in it,
 # Using a Makefile
 Let's say we have this Makefile that tracks the current version of our application
 
-```make
+```bash
 # This is the current version of your application
 VERSION := 2.0.3-SNAPSHOT
 
@@ -126,3 +128,8 @@ v0.1.0
 v0.1.1
 ```
 
+As said in the [project's README](https://github.com/jenkins-x/jx-release-version)
+
+- If your project is new or has no existing git tags then running `jx-release-version` will return a default version of `0.0.1`
+- If your latest git tag is `1.2.3` and you Makefile or pom.xml is `1.2.0-SNAPSHOT` then `jx-release-version` will return `1.2.4`
+- If your latest git tag is `1.2.3` and your Makefile or pom.xml is `2.0.0` then `jx-release-version` will return `2.0.0`
