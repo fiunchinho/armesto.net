@@ -21,8 +21,8 @@ enableGitInfo = true
 
 [params]
 	author = "Jose Armesto"
-	bio = "Soy Jose Armesto. Apasionado de la programación que disfruta creando cosas y calmando su curiosidad. Obsesionado con las buenas prácticas."
-	location = "Barcelona"
+	bio = "Software Engineer"
+	location = "Vigo"
 	site_description = "Software como estilo de vida"
 	copyright  = "Powered by [Hugo](//gohugo.io). Theme by [PPOffice](https://github.com/ppoffice)."
 	avatar = "images/avatar.png"
